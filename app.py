@@ -74,11 +74,9 @@ def del_user():
 @app.route('/geocodificar_base', methods=['GET'])
 def getGeoBase():
     user = mongo.db.users
-    output = []
     for s in user.find():
         if s['lattitud'] != '0' and s['longitud'] != '0':
             geocode = gmaps.geocode(s['address'])
-            output.append(geocode)
             user.update({'id': s['id']},{'lattitud':geocode['results'][0]['geometry']['lat'], "longitud":geocode['results'][0]['geometry']['lng'] }, upsert=True)
     return dumps(output)
 
