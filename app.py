@@ -79,7 +79,7 @@ def getGeoBase():
         if s['lattitud'] != '0' and s['longitud'] != '0':
             geocode = gmaps.geocode(s['address'])
             output.append(geocode)
-            #user.update({'id': s['id']},{})
+            user.update({'id': s['id']},{'lattitud':geocode['results']['geometry']['lat'], "longitud":geocode['results']['geometry']['lng'] }, upsert=True)
     return dumps(output)
 
 if __name__ == "__main__":
