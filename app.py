@@ -75,7 +75,7 @@ def del_user():
 def getGeoBase():
     user = mongo.db.users
     for s in user.find():
-        if s['lattitud'] != '0' and s['longitud'] != '0':
+        if s['lattitud'] == '0' and s['longitud'] == '0':
             geocode = gmaps.geocode(s['address'])
             user.update({'id': s['id']},{'lattitud':geocode['results'][0]['geometry']['lat'], "longitud":geocode['results'][0]['geometry']['lng'] }, upsert=True)
     return dumps(output)
