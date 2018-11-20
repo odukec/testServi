@@ -50,8 +50,8 @@ def add_user():
         'address': address,
         'city': city,
         'id': idu,
-        'lattitud': '0',
-        'longitud': '0'
+        'lattitud': 0,
+        'longitud': 0
     })
     new_user = user.find_one({'_id': user_id })
     return dumps(new_user)
@@ -75,7 +75,7 @@ def del_user():
 def getGeoBase():
     user = mongo.db.users
     for s in user.find():
-        if s['lattitud'] == '0' and s['longitud'] == '0':
+        if s['lattitud'] == 0 and s['longitud'] == 0:
             geocode = gmaps.geocode(s['address'])
             user.update({'id': s['id']},{'lattitud':geocode[0]["geometry"]["location"]["lat"], "longitud":geocode[0]["geometry"]["location"]["lng"] }, upsert=True)
     return dumps('Operation succesfully!')
