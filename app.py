@@ -23,7 +23,7 @@ def get_users():
         user = mongo.db.users
         s = user.find_one({'id' : _id})
         if s:
-            output = { s }
+            output = s
         else:
             output = "User not found!"
         return dumps(output) 
