@@ -77,7 +77,6 @@ def getGeoBase():
     for s in user.find():
         if s['lattitud'] == '0' and s['longitud'] == '0':
             geocode = gmaps.geocode(s['address'])
-            print(geocode[0]["geometry"]["location"]["lat"])
             user.update({'id': s['id']},{'lattitud':geocode[0]["geometry"]["location"]["lat"], "longitud":geocode[0]["geometry"]["location"]["lng"] }, upsert=True)
     return dumps('Operation succesfully!')
 
